@@ -1,5 +1,8 @@
 package kata.supermarket;
 
+import kata.supermarket.discounts.Discount;
+import kata.supermarket.discounts.NoDiscount;
+
 import java.math.BigDecimal;
 
 public class Product {
@@ -15,6 +18,10 @@ public class Product {
     }
 
     public Item oneOf() {
-        return new ItemByUnit(this);
+        return new ItemByUnit(this, 1, new NoDiscount());
+    }
+
+    public Item createItem(final int units, final Discount discount) {
+        return new ItemByUnit(this, units, discount);
     }
 }

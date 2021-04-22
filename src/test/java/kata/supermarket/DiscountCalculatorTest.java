@@ -1,5 +1,6 @@
 package kata.supermarket;
 
+import kata.supermarket.discounts.BuyTwoForOnePoundDiscount;
 import kata.supermarket.discounts.OneKiloHalfPriceDiscount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,12 +28,22 @@ public class DiscountCalculatorTest {
         return Stream.of(
                 noItems(),
                 aSingleItemPricedByWeightHalfPrice(),
-                multipleItemsPricedByWeightHalfPrice()
+                multipleItemsPricedByWeightHalfPrice(),
+                multipleItemsPricedPerUnitTwoForOnePound()
         );
+    }
+
+    private static Arguments multipleItemsPricedPerUnitTwoForOnePound() {
+        return Arguments.of("multiple items priced per unit", "1.49",
+                Collections.singletonList(aPintOfMilk()));
     }
 
     private static Arguments noItems() {
         return Arguments.of("no items", "0.00", Collections.emptyList());
+    }
+
+    private static Item aPintOfMilk() {
+        return new Product(new BigDecimal("0.49")).createItem(3, new BuyTwoForOnePoundDiscount());
     }
 
     private static Arguments aSingleItemPricedByWeightHalfPrice() {
