@@ -1,5 +1,6 @@
 package kata.supermarket;
 
+import kata.supermarket.discounts.BuyOneGetOneFreeDiscount;
 import kata.supermarket.discounts.BuyTwoForOnePoundDiscount;
 import kata.supermarket.discounts.OneKiloHalfPriceDiscount;
 import org.junit.jupiter.api.DisplayName;
@@ -29,13 +30,19 @@ public class DiscountCalculatorTest {
                 noItems(),
                 aSingleItemPricedByWeightHalfPrice(),
                 multipleItemsPricedByWeightHalfPrice(),
-                multipleItemsPricedPerUnitTwoForOnePound()
+                multipleItemsPricedPerUnitTwoForOnePound(),
+                multipleItemsPricedPerUnitBuyOneGetOneFree()
         );
     }
 
     private static Arguments multipleItemsPricedPerUnitTwoForOnePound() {
-        return Arguments.of("multiple items priced per unit", "1.49",
+        return Arguments.of("multiple items priced per unit with two for one", "1.49",
                 Collections.singletonList(aPintOfMilk()));
+    }
+
+    private static Arguments multipleItemsPricedPerUnitBuyOneGetOneFree() {
+        return Arguments.of("multiple items priced per unit with buy one get one free", "3.10",
+                Collections.singletonList(aPackOfDigestives()));
     }
 
     private static Arguments noItems() {
@@ -46,12 +53,16 @@ public class DiscountCalculatorTest {
         return new Product(new BigDecimal("0.49")).createItem(3, new BuyTwoForOnePoundDiscount());
     }
 
+    private static Item aPackOfDigestives() {
+        return new Product(new BigDecimal("1.55")).createItem(3, new BuyOneGetOneFreeDiscount());
+    }
+
     private static Arguments aSingleItemPricedByWeightHalfPrice() {
-        return Arguments.of("a single weighed item", "0.63", Collections.singleton(twoFiftyGramsOfAmericanSweetsHalfPrice()));
+        return Arguments.of("a single weighed item with one kilo half price", "0.63", Collections.singleton(twoFiftyGramsOfAmericanSweetsHalfPrice()));
     }
 
     private static Arguments multipleItemsPricedByWeightHalfPrice() {
-        return Arguments.of("multiple weighed items", "0.93",
+        return Arguments.of("multiple weighed items with one kilo half price", "0.93",
                 Arrays.asList(twoFiftyGramsOfAmericanSweetsHalfPrice(), twoHundredGramsOfPickAndMixHalfPrice())
         );
     }
