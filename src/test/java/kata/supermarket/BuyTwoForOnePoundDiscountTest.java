@@ -23,10 +23,10 @@ public class BuyTwoForOnePoundDiscountTest {
 
     static Stream<Arguments> shouldApplyDiscount() {
         return Stream.of(
-                Arguments.of("1 units", "0.49", oneUnitAtBuyTwoForOnePound()),
-                Arguments.of("2 units", "1.00", twoUnitAtBuyTwoForOnePound()),
-                Arguments.of("3 units", "1.49", threeUnitAtBuyTwoForOnePound()),
-                Arguments.of("4 units", "2.00", fourUnitAtBuyTwoForOnePound())
+                Arguments.of("1 units (less than £1)", "0.00", oneUnitAtBuyTwoForOnePound()),
+                Arguments.of("2 units (less than £1)", "0.00", twoUnitAtBuyTwoForOnePound()),
+                Arguments.of("3 units (greater than £1)", "0.10", threeUnitAtBuyTwoForOnePound()),
+                Arguments.of("4 units (greater than £1)", "0.20", fourUnitAtBuyTwoForOnePound())
         );
     }
 
@@ -39,10 +39,10 @@ public class BuyTwoForOnePoundDiscountTest {
     }
 
     private static Item threeUnitAtBuyTwoForOnePound() {
-        return new Product(new BigDecimal("0.49")).createItem(3, new BuyTwoForOnePoundDiscount());
+        return new Product(new BigDecimal("0.55")).createItem(3, new BuyTwoForOnePoundDiscount());
     }
 
     private static Item fourUnitAtBuyTwoForOnePound() {
-        return new Product(new BigDecimal("0.49")).createItem(4, new BuyTwoForOnePoundDiscount());
+        return new Product(new BigDecimal("0.55")).createItem(4, new BuyTwoForOnePoundDiscount());
     }
 }

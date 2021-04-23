@@ -35,13 +35,23 @@ public class DiscountCalculatorTest {
         );
     }
 
+    private static Arguments aSingleItemPricedByWeightHalfPrice() {
+        return Arguments.of("a single weighed item with one kilo half price", "0.63", Collections.singleton(twoFiftyGramsOfAmericanSweetsHalfPrice()));
+    }
+
+    private static Arguments multipleItemsPricedByWeightHalfPrice() {
+        return Arguments.of("multiple weighed items with one kilo half price", "0.93",
+                Arrays.asList(twoFiftyGramsOfAmericanSweetsHalfPrice(), twoHundredGramsOfPickAndMixHalfPrice())
+        );
+    }
+
     private static Arguments multipleItemsPricedPerUnitTwoForOnePound() {
-        return Arguments.of("multiple items priced per unit with two for one", "1.49",
+        return Arguments.of("multiple items priced per unit with two for one", "0.00",
                 Collections.singletonList(aPintOfMilk()));
     }
 
     private static Arguments multipleItemsPricedPerUnitBuyOneGetOneFree() {
-        return Arguments.of("multiple items priced per unit with buy one get one free", "3.10",
+        return Arguments.of("multiple items priced per unit with buy one get one free", "1.55",
                 Collections.singletonList(aPackOfDigestives()));
     }
 
@@ -55,16 +65,6 @@ public class DiscountCalculatorTest {
 
     private static Item aPackOfDigestives() {
         return new Product(new BigDecimal("1.55")).createItem(3, new BuyOneGetOneFreeDiscount());
-    }
-
-    private static Arguments aSingleItemPricedByWeightHalfPrice() {
-        return Arguments.of("a single weighed item with one kilo half price", "0.63", Collections.singleton(twoFiftyGramsOfAmericanSweetsHalfPrice()));
-    }
-
-    private static Arguments multipleItemsPricedByWeightHalfPrice() {
-        return Arguments.of("multiple weighed items with one kilo half price", "0.93",
-                Arrays.asList(twoFiftyGramsOfAmericanSweetsHalfPrice(), twoHundredGramsOfPickAndMixHalfPrice())
-        );
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {

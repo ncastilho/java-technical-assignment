@@ -23,9 +23,9 @@ public class BuyOneGetOneFreeDiscountTest {
 
     static Stream<Arguments> shouldApplyDiscount() {
         return Stream.of(
-                Arguments.of("1 units", "0.49", oneUnitsAtBuyOneGetOneFree()),
+                Arguments.of("1 units", "0.00", oneUnitsAtBuyOneGetOneFree()),
                 Arguments.of("2 units", "0.49", twoUnitsAtBuyOneGetOneFree()),
-                Arguments.of("3 units", "0.98", threeUnitsAtBuyOneGetOneFree()),
+                Arguments.of("3 units", "0.49", threeUnitsAtBuyOneGetOneFree()),
                 Arguments.of("4 units", "0.98", fourUnitsAtBuyOneGetOneFree())
         );
     }

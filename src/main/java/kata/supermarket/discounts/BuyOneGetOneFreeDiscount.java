@@ -9,8 +9,8 @@ public class BuyOneGetOneFreeDiscount implements Discount {
 
     @Override
     public BigDecimal apply(final ItemByUnit itemByUnit) {
-        return new BigDecimal(itemByUnit.units()).divide(new BigDecimal(2), RoundingMode.CEILING)
-                        .multiply(itemByUnit.price())
+        return new BigDecimal(itemByUnit.units() / 2)
+                .multiply(itemByUnit.pricePerUnit())
                         .setScale(2, RoundingMode.HALF_UP);
     }
 }

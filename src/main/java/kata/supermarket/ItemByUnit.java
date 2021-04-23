@@ -3,6 +3,7 @@ package kata.supermarket;
 import kata.supermarket.discounts.Discount;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ItemByUnit implements Item {
 
@@ -17,6 +18,10 @@ public class ItemByUnit implements Item {
     }
 
     public BigDecimal price() {
+        return pricePerUnit().multiply(new BigDecimal(units)).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal pricePerUnit() {
         return product.pricePerUnit();
     }
 
